@@ -1,0 +1,421 @@
+/* ==========================================================================
+   TerraGuide — layout: app shell, sidebar, topbar, mobile navigation
+   ========================================================================== */
+
+.tg-app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* --------------------------------------------------------------- shell --- */
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.shell__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 22px clamp(14px, 2.6vw, 34px) 80px;
+  min-width: 0;
+}
+
+/* ------------------------------------------------------------- sidebar --- */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #131d2d 0%, #101827 100%);
+  border-right: 4px solid var(--ink);
+  box-shadow: inset -4px 0 0 rgba(74, 86, 104, 0.35);
+  overflow: hidden;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 14px 14px;
+  border-bottom: 4px solid var(--ink);
+  background: linear-gradient(180deg, rgba(242, 193, 78, 0.09), transparent);
+}
+
+.sidebar__logo {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 15px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 0 var(--gold-deep);
+  clip-path: polygon(
+    18% 0, 82% 0, 82% 18%, 100% 18%, 100% 82%, 82% 82%, 82% 100%, 18% 100%,
+    18% 82%, 0 82%, 0 18%, 18% 18%
+  );
+}
+
+.sidebar__title {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.sidebar__sub {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.sidebar__scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 12px 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sidebar__scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.sidebar__scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+.sidebar__label {
+  font-family: var(--font-pixel);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  text-transform: uppercase;
+  padding: 12px 8px 6px;
+}
+
+.navlink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-family: var(--font-pixel);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-left: 4px solid transparent;
+  transition: background 0.12s steps(2), color 0.12s, border-color 0.12s;
+  text-align: left;
+}
+
+.navlink:hover {
+  background: var(--panel-light);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navlink.is-active {
+  background: linear-gradient(90deg, rgba(242, 193, 78, 0.16), transparent);
+  border-left-color: var(--gold);
+  color: var(--gold);
+}
+
+.navlink__icon {
+  width: 20px;
+  text-align: center;
+  font-size: 1rem;
+  flex: none;
+}
+
+.navlink__badge {
+  margin-left: auto;
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  background: var(--panel-light);
+  color: var(--muted);
+  border: 2px solid var(--border-soft);
+}
+
+.sidebar__footer {
+  border-top: 4px solid var(--ink);
+  padding: 10px;
+  background: var(--panel-deep);
+}
+
+.sidebar__world {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px 10px;
+  font-family: var(--font-pixel);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.sidebar__world b {
+  color: var(--text);
+}
+
+/* -------------------------------------------------------------- topbar --- */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--topbar-h);
+  padding: 10px clamp(12px, 2.4vw, 26px);
+  background: rgba(13, 21, 34, 0.94);
+  backdrop-filter: blur(3px);
+  border-bottom: 4px solid var(--ink);
+  box-shadow: inset 0 -4px 0 rgba(74, 86, 104, 0.28);
+}
+
+.topbar__menu {
+  display: none;
+}
+
+.topbar__stage {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.topbar__stage-label {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.topbar__stage-name {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  color: var(--gold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar__spacer {
+  flex: 1 1 auto;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ------------------------------------------------------- mobile drawer --- */
+
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(4, 7, 13, 0.72);
+  animation: fade-in 0.15s steps(3);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 61;
+  width: min(280px, 84vw);
+  animation: slide-in 0.18s steps(4);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawer .sidebar {
+  height: 100%;
+  border-right-width: 4px;
+}
+
+/* ---------------------------------------------------------- bottom nav --- */
+
+.bottomnav {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  height: calc(var(--bottomnav-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: #0d1522;
+  border-top: 4px solid var(--ink);
+  box-shadow: inset 0 4px 0 rgba(74, 86, 104, 0.3);
+}
+
+.bottomnav__inner {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: var(--bottomnav-h);
+}
+
+.bottomnav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--dim);
+  font-family: var(--font-pixel);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-top: 3px solid transparent;
+  min-height: 44px;
+}
+
+.bottomnav__item span:first-child {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.bottomnav__item.is-active {
+  color: var(--gold);
+  border-top-color: var(--gold);
+  background: linear-gradient(180deg, rgba(242, 193, 78, 0.14), transparent);
+}
+
+/* ---------------------------------------------------------- page head --- */
+
+.pagehead {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 4px solid var(--border-soft);
+}
+
+.pagehead__text {
+  min-width: 0;
+  flex: 1 1 320px;
+}
+
+.pagehead h1 {
+  margin-bottom: 6px;
+}
+
+.pagehead__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------- responsive --- */
+
+@media (max-width: 1080px) {
+  :root {
+    --sidebar-w: 208px;
+  }
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shell > .sidebar {
+    display: none;
+  }
+
+  .topbar__menu {
+    display: inline-flex;
+  }
+
+  .bottomnav {
+    display: block;
+  }
+
+  .page {
+    padding-bottom: calc(var(--bottomnav-h) + 40px);
+  }
+}
+
+@media (max-width: 700px) {
+  .topbar {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+
+  /* "Edit journey" stays reachable from the dashboard and the drawer */
+  .topbar__actions {
+    display: none;
+  }
+
+  .topbar__stage {
+    max-width: 32vw;
+  }
+
+  .search {
+    flex: 1 1 auto;
+    max-width: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .topbar__stage {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 14px;
+  }
+
+  .tg-sky__moon {
+    width: 64px;
+    height: 64px;
+    top: 30px;
+  }
+
+  .pagehead {
+    margin-bottom: 14px;
+  }
+}

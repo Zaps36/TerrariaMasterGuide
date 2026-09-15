@@ -1,0 +1,15 @@
+{
+  "name": "terraguide",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TerraGuide — a fan-made Terraria progression companion. Zero dependencies, no build step required.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8123",
+    "serve": "python3 -m http.server 8123",
+    "build": "node build.mjs",
+    "check": "node build.mjs >/dev/null && echo 'module graph + bundle parse OK'"
+  },
+  "keywords": ["terraria", "progression", "guide", "pixel-art", "vanilla-js"],
+  "license": "MIT"
+}

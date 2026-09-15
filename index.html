@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="terraria">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TerraGuide — Know What To Do Next</title>
+<meta name="description" content="TerraGuide is a fan-made Terraria progression companion: boss order, class loadouts, preparation checklists and smart recommendations from Copper Shortsword to Moon Lord." />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#080D18" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Rubik:wght@400;500;600;700&display=swap"
+  rel="stylesheet" />
+
+<link rel="stylesheet" href="./styles/base.css" />
+<link rel="stylesheet" href="./styles/layout.css" />
+<link rel="stylesheet" href="./styles/components.css" />
+<link rel="stylesheet" href="./styles/pages.css" />
+<link rel="icon" href="data:," />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- Pixel night-sky environment (populated by components/background.js) -->
+  <div class="tg-sky" id="tg-sky" aria-hidden="true"></div>
+
+  <div id="app" class="tg-app"></div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <noscript>
+    <div style="padding:2rem;color:#F4F1DE;font-family:system-ui">
+      TerraGuide is an interactive progression tracker and needs JavaScript enabled.
+    </div>
+  </noscript>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
