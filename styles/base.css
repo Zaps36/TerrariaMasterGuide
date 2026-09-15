@@ -68,6 +68,61 @@
   --notch: 8px;
 }
 
+/* ==========================================================================
+   LIGHT THEME — "day in a Terraria forest"
+   Bright sky, warm wood + parchment panels, deep-green ink. Only the tokens
+   change; every component reads from these variables, so the whole app
+   re-themes from this one block.
+   ========================================================================== */
+
+:root[data-theme='light'] {
+  /* surfaces: parchment + oak plank */
+  --bg: #cfe7f2;
+  --bg-2: #e7dcc0;
+  --panel: #efe6cf;
+  --panel-light: #f7f1df;
+  --panel-deep: #e2d5b6;
+  --border: #a9895a;
+  --border-soft: #cbb488;
+  --ink: #5a4326; /* wood-brown outline instead of near-black */
+
+  /* text: deep forest ink */
+  --text: #33291a;
+  --muted: #6a5a41;
+  --dim: #8a7b60;
+
+  /* semantic — deepened so they read on light surfaces */
+  --gold: #c98a1e;
+  --gold-deep: #8a5c10;
+  --success: #3f9b47;
+  --warning: #d18a1c;
+  --danger: #c94a34;
+
+  /* class accents (darker variants for contrast on parchment) */
+  --melee: #c85a45;
+  --ranger: #2f7fc4;
+  --mage: #7a53c0;
+  --summoner: #a94fd0;
+  --universal: #c98a1e;
+
+  --corruption: #7a53c0;
+  --crimson: #c94a34;
+
+  /* rarity tiers, contrast-tuned for a bright background */
+  --rarity-gray: #6f6f6f;
+  --rarity-white: #4a4433;
+  --rarity-blue: #2f6fc4;
+  --rarity-green: #2f8f37;
+  --rarity-orange: #c07214;
+  --rarity-red: #c23a2f;
+  --rarity-pink: #c74a9e;
+  --rarity-purple: #8a45c0;
+  --rarity-lime: #5f8f14;
+  --rarity-yellow: #b8901c;
+  --rarity-cyan: #1f9a9a;
+  --rarity-rainbow: #c24a8f;
+}
+
 /* --------------------------------------------------------------- reset --- */
 
 *,
@@ -376,6 +431,79 @@ html.compact .page {
     radial-gradient(1100px 620px at 78% -8%, rgba(90, 74, 150, 0.42), transparent 65%),
     radial-gradient(900px 520px at 10% 4%, rgba(30, 66, 110, 0.4), transparent 62%),
     linear-gradient(180deg, #0a1020 0%, #0a1224 42%, #0b1526 68%, #080d18 100%);
+}
+
+/* ---- day-in-forest sky ---- */
+:root[data-theme='light'] .tg-sky {
+  background:
+    radial-gradient(680px 420px at 82% -6%, rgba(255, 236, 150, 0.85), transparent 60%),
+    radial-gradient(900px 520px at 12% 2%, rgba(180, 224, 255, 0.6), transparent 62%),
+    linear-gradient(180deg, #8fd0f0 0%, #a9dcf2 34%, #c9ead0 66%, #d8e6b0 100%);
+}
+
+/* stars only make sense at night */
+:root[data-theme='light'] .tg-sky__stars,
+:root[data-theme='light'] .tg-sky__moon {
+  display: none;
+}
+
+/* the "moon" node becomes a warm sun in light mode */
+:root[data-theme='light'] .tg-sky__sun {
+  display: block;
+}
+
+.tg-sky__sun {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 8vw;
+  width: 84px;
+  height: 84px;
+  background: #ffe27a;
+  box-shadow:
+    0 0 0 8px rgba(255, 226, 122, 0.35),
+    0 0 0 18px rgba(255, 226, 122, 0.18),
+    0 0 80px 30px rgba(255, 226, 122, 0.5);
+  clip-path: polygon(
+    25% 0, 75% 0, 75% 8%, 92% 8%, 92% 25%, 100% 25%, 100% 75%, 92% 75%,
+    92% 92%, 75% 92%, 75% 100%, 25% 100%, 25% 92%, 8% 92%, 8% 75%, 0 75%,
+    0 25%, 8% 25%, 8% 8%, 25% 8%
+  );
+}
+
+/* daytime clouds: solid, fluffy, white */
+:root[data-theme='light'] .tg-sky__cloud {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    12px -7px 0 0 rgba(255, 255, 255, 0.85),
+    -14px -5px 0 0 rgba(255, 255, 255, 0.8),
+    26px 0 0 0 rgba(255, 255, 255, 0.82);
+}
+
+/* rolling green hills instead of dark mountains */
+:root[data-theme='light'] .tg-sky__ridge--far {
+  background: #7db85a;
+  opacity: 0.75;
+}
+:root[data-theme='light'] .tg-sky__ridge--near {
+  background: #5fa03f;
+}
+
+/* lush green tree canopies */
+:root[data-theme='light'] .tg-sky__tree {
+  background: #3f7a2c;
+  opacity: 0.92;
+}
+
+:root[data-theme='light'] .tg-sky__ground {
+  background: #4a6b28;
+  border-top-color: #6f9a3c;
+}
+
+/* daytime motes read as drifting pollen / leaves */
+:root[data-theme='light'] .tg-sky__mote {
+  opacity: 0.5;
 }
 
 .tg-sky__stars,

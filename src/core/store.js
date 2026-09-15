@@ -40,6 +40,7 @@ function demoState() {
     display: {
       reducedMotion: false,
       compact: false,
+      theme: 'dark', // 'dark' (night) | 'light' (day-in-forest)
     },
   };
 }
@@ -223,6 +224,19 @@ export function applyDisplayPreferences() {
   const root = document.documentElement;
   root.classList.toggle('reduced-motion', Boolean(state.display.reducedMotion));
   root.classList.toggle('compact', Boolean(state.display.compact));
+  const theme = state.display.theme === 'light' ? 'light' : 'dark';
+  root.setAttribute('data-theme', theme);
+  root.style.setProperty('color-scheme', theme);
+}
+
+export function getTheme() {
+  return state.display.theme === 'light' ? 'light' : 'dark';
+}
+
+export function toggleTheme() {
+  const next = getTheme() === 'light' ? 'dark' : 'light';
+  setDisplay({ theme: next });
+  return next;
 }
 
 export const storageKey = STORAGE_KEY;

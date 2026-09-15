@@ -143,6 +143,24 @@ export function settingsPage() {
         h(
           'div.stack',
           settingRow(
+            'Theme',
+            'Dark mode is a Terraria night sky; light mode is a bright day in the forest.',
+            chipGroup({
+              options: [
+                { id: 'dark', label: '🌙 Dark' },
+                { id: 'light', label: '☀️ Light' },
+              ],
+              selected: [state.display.theme === 'light' ? 'light' : 'dark'],
+              multi: false,
+              onToggle: (id) => {
+                setDisplay({ theme: id });
+                toast(id === 'light' ? 'Light mode — day in the forest' : 'Dark mode — night sky', {
+                  icon: id === 'light' ? '☀️' : '🌙',
+                });
+              },
+            })
+          ),
+          settingRow(
             'Reduced animations',
             'Turns off twinkling stars, drifting clouds, pulsing nodes and sparkle effects.',
             toggle(state.display.reducedMotion, (value) => {

@@ -86,6 +86,61 @@
   --notch: 8px;
 }
 
+/* ==========================================================================
+   LIGHT THEME — "day in a Terraria forest"
+   Bright sky, warm wood + parchment panels, deep-green ink. Only the tokens
+   change; every component reads from these variables, so the whole app
+   re-themes from this one block.
+   ========================================================================== */
+
+:root[data-theme='light'] {
+  /* surfaces: parchment + oak plank */
+  --bg: #cfe7f2;
+  --bg-2: #e7dcc0;
+  --panel: #efe6cf;
+  --panel-light: #f7f1df;
+  --panel-deep: #e2d5b6;
+  --border: #a9895a;
+  --border-soft: #cbb488;
+  --ink: #5a4326; /* wood-brown outline instead of near-black */
+
+  /* text: deep forest ink */
+  --text: #33291a;
+  --muted: #6a5a41;
+  --dim: #8a7b60;
+
+  /* semantic — deepened so they read on light surfaces */
+  --gold: #c98a1e;
+  --gold-deep: #8a5c10;
+  --success: #3f9b47;
+  --warning: #d18a1c;
+  --danger: #c94a34;
+
+  /* class accents (darker variants for contrast on parchment) */
+  --melee: #c85a45;
+  --ranger: #2f7fc4;
+  --mage: #7a53c0;
+  --summoner: #a94fd0;
+  --universal: #c98a1e;
+
+  --corruption: #7a53c0;
+  --crimson: #c94a34;
+
+  /* rarity tiers, contrast-tuned for a bright background */
+  --rarity-gray: #6f6f6f;
+  --rarity-white: #4a4433;
+  --rarity-blue: #2f6fc4;
+  --rarity-green: #2f8f37;
+  --rarity-orange: #c07214;
+  --rarity-red: #c23a2f;
+  --rarity-pink: #c74a9e;
+  --rarity-purple: #8a45c0;
+  --rarity-lime: #5f8f14;
+  --rarity-yellow: #b8901c;
+  --rarity-cyan: #1f9a9a;
+  --rarity-rainbow: #c24a8f;
+}
+
 /* --------------------------------------------------------------- reset --- */
 
 *,
@@ -394,6 +449,79 @@ html.compact .page {
     radial-gradient(1100px 620px at 78% -8%, rgba(90, 74, 150, 0.42), transparent 65%),
     radial-gradient(900px 520px at 10% 4%, rgba(30, 66, 110, 0.4), transparent 62%),
     linear-gradient(180deg, #0a1020 0%, #0a1224 42%, #0b1526 68%, #080d18 100%);
+}
+
+/* ---- day-in-forest sky ---- */
+:root[data-theme='light'] .tg-sky {
+  background:
+    radial-gradient(680px 420px at 82% -6%, rgba(255, 236, 150, 0.85), transparent 60%),
+    radial-gradient(900px 520px at 12% 2%, rgba(180, 224, 255, 0.6), transparent 62%),
+    linear-gradient(180deg, #8fd0f0 0%, #a9dcf2 34%, #c9ead0 66%, #d8e6b0 100%);
+}
+
+/* stars only make sense at night */
+:root[data-theme='light'] .tg-sky__stars,
+:root[data-theme='light'] .tg-sky__moon {
+  display: none;
+}
+
+/* the "moon" node becomes a warm sun in light mode */
+:root[data-theme='light'] .tg-sky__sun {
+  display: block;
+}
+
+.tg-sky__sun {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 8vw;
+  width: 84px;
+  height: 84px;
+  background: #ffe27a;
+  box-shadow:
+    0 0 0 8px rgba(255, 226, 122, 0.35),
+    0 0 0 18px rgba(255, 226, 122, 0.18),
+    0 0 80px 30px rgba(255, 226, 122, 0.5);
+  clip-path: polygon(
+    25% 0, 75% 0, 75% 8%, 92% 8%, 92% 25%, 100% 25%, 100% 75%, 92% 75%,
+    92% 92%, 75% 92%, 75% 100%, 25% 100%, 25% 92%, 8% 92%, 8% 75%, 0 75%,
+    0 25%, 8% 25%, 8% 8%, 25% 8%
+  );
+}
+
+/* daytime clouds: solid, fluffy, white */
+:root[data-theme='light'] .tg-sky__cloud {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    12px -7px 0 0 rgba(255, 255, 255, 0.85),
+    -14px -5px 0 0 rgba(255, 255, 255, 0.8),
+    26px 0 0 0 rgba(255, 255, 255, 0.82);
+}
+
+/* rolling green hills instead of dark mountains */
+:root[data-theme='light'] .tg-sky__ridge--far {
+  background: #7db85a;
+  opacity: 0.75;
+}
+:root[data-theme='light'] .tg-sky__ridge--near {
+  background: #5fa03f;
+}
+
+/* lush green tree canopies */
+:root[data-theme='light'] .tg-sky__tree {
+  background: #3f7a2c;
+  opacity: 0.92;
+}
+
+:root[data-theme='light'] .tg-sky__ground {
+  background: #4a6b28;
+  border-top-color: #6f9a3c;
+}
+
+/* daytime motes read as drifting pollen / leaves */
+:root[data-theme='light'] .tg-sky__mote {
+  opacity: 0.5;
 }
 
 .tg-sky__stars,
@@ -990,6 +1118,11 @@ html.compact .page {
     display: none;
   }
 
+  /* the theme toggle stays available on mobile */
+  .topbar__theme {
+    order: 3;
+  }
+
   .topbar__stage {
     max-width: 32vw;
   }
@@ -1020,6 +1153,48 @@ html.compact .page {
   .pagehead {
     margin-bottom: 14px;
   }
+}
+
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES — layout (sidebar / topbar / bottom nav)
+   ========================================================================== */
+
+:root[data-theme='light'] .sidebar {
+  background: linear-gradient(180deg, #efe4c6 0%, #e7dabb 100%);
+  box-shadow: inset -4px 0 0 rgba(169, 137, 90, 0.4);
+}
+:root[data-theme='light'] .sidebar__brand {
+  background: linear-gradient(180deg, rgba(201, 138, 30, 0.14), transparent);
+}
+:root[data-theme='light'] .sidebar__logo {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .navlink:hover {
+  background: #ddcaa0;
+}
+:root[data-theme='light'] .navlink.is-active {
+  background: linear-gradient(90deg, rgba(201, 138, 30, 0.22), transparent);
+}
+:root[data-theme='light'] .sidebar__footer {
+  background: var(--panel-deep);
+}
+
+:root[data-theme='light'] .topbar {
+  background: rgba(239, 230, 207, 0.94);
+  box-shadow: inset 0 -4px 0 rgba(169, 137, 90, 0.35);
+}
+
+:root[data-theme='light'] .bottomnav {
+  background: #e7dabb;
+  box-shadow: inset 0 4px 0 rgba(169, 137, 90, 0.35);
+}
+:root[data-theme='light'] .bottomnav__item.is-active {
+  background: linear-gradient(180deg, rgba(201, 138, 30, 0.2), transparent);
+}
+:root[data-theme='light'] .drawer-backdrop,
+:root[data-theme='light'] .modal-backdrop {
+  background: rgba(51, 41, 26, 0.55);
 }
 
 </style>
@@ -2189,6 +2364,117 @@ button.card:hover {
 }
 .scroll-x::-webkit-scrollbar-thumb {
   background: var(--border);
+}
+
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES — components
+   These target the few surfaces that use literal dark gradients (everything
+   else already reads from the re-themed variables in base.css).
+   ========================================================================== */
+
+:root[data-theme='light'] .panel {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 30%, var(--panel) 100%);
+}
+:root[data-theme='light'] .panel--deep {
+  background: linear-gradient(180deg, #efe6cf 0, var(--panel-deep) 100%);
+}
+:root[data-theme='light'] .panel--stone {
+  background:
+    repeating-linear-gradient(90deg, rgba(90, 67, 38, 0.04) 0 3px, transparent 3px 6px),
+    linear-gradient(180deg, #f2ead6 0, #e9dec2 30%, #e2d5b6 100%);
+}
+
+:root[data-theme='light'] .btn {
+  background: var(--panel-deep);
+  box-shadow:
+    inset 0 0 0 3px var(--ink),
+    inset 0 4px 0 3px rgba(255, 255, 255, 0.4),
+    inset 0 -6px 0 3px rgba(90, 67, 38, 0.22);
+}
+:root[data-theme='light'] .btn:hover {
+  background: #dccaa2;
+}
+:root[data-theme='light'] .btn--primary {
+  background: var(--gold);
+  color: #fff8e6;
+}
+:root[data-theme='light'] .btn--primary:hover {
+  background: #dda033;
+}
+:root[data-theme='light'] .btn--success {
+  color: #f2fff2;
+}
+:root[data-theme='light'] .btn--danger {
+  color: #fff0eb;
+}
+:root[data-theme='light'] .stars__off {
+  color: #c3b48f;
+}
+
+:root[data-theme='light'] .sprite-tile {
+  background: linear-gradient(180deg, #f4ecd8 0, #e7dabb 100%);
+}
+:root[data-theme='light'] .sprite-tile--gold {
+  background: linear-gradient(180deg, #f6ecc6 0, #ecdca0 100%);
+}
+
+:root[data-theme='light'] .card {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 30%, var(--panel) 100%);
+}
+:root[data-theme='light'] .card--selectable.is-selected {
+  background: linear-gradient(180deg, #f9edc8 0, var(--panel) 30%);
+}
+
+:root[data-theme='light'] .callout {
+  background: linear-gradient(180deg, rgba(201, 138, 30, 0.18), rgba(239, 230, 207, 0.95));
+}
+:root[data-theme='light'] .callout--danger {
+  background: linear-gradient(180deg, rgba(201, 74, 52, 0.16), rgba(239, 230, 207, 0.95));
+}
+:root[data-theme='light'] .callout--info {
+  background: linear-gradient(180deg, rgba(47, 127, 196, 0.16), rgba(239, 230, 207, 0.95));
+}
+:root[data-theme='light'] .callout--optional {
+  background: linear-gradient(180deg, rgba(63, 155, 71, 0.16), rgba(239, 230, 207, 0.95));
+}
+
+:root[data-theme='light'] .modal {
+  background: linear-gradient(180deg, #f7f1df 0, var(--panel) 18%, var(--panel) 100%);
+}
+:root[data-theme='light'] .modal__head {
+  background: linear-gradient(180deg, #f4ecd6 0, #e9dec2 100%);
+}
+:root[data-theme='light'] .modal__close {
+  background: var(--panel-deep);
+}
+:root[data-theme='light'] .modal__close:hover {
+  color: #fff0eb;
+}
+
+:root[data-theme='light'] .toast {
+  background: linear-gradient(180deg, #f4ecd6 0, #e7dabb 100%);
+}
+
+:root[data-theme='light'] .search__results {
+  background: #f4ecd6;
+}
+:root[data-theme='light'] .search__input,
+:root[data-theme='light'] .chip,
+:root[data-theme='light'] .stat {
+  background: var(--panel-deep);
+}
+:root[data-theme='light'] .chip.is-active {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .check {
+  background: rgba(226, 213, 182, 0.5);
+}
+:root[data-theme='light'] .check__box {
+  background: var(--panel-deep);
+}
+:root[data-theme='light'] .check.is-done .check__box {
+  color: #f2fff2;
 }
 
 </style>
@@ -3404,6 +3690,125 @@ a.featurecard:hover {
   }
 }
 
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES — page compositions
+   ========================================================================== */
+
+:root[data-theme='light'] .hero {
+  background:
+    radial-gradient(600px 240px at 50% 0%, rgba(201, 138, 30, 0.16), transparent 70%),
+    linear-gradient(180deg, #f7f1df 0, #efe4c6 55%, #e7dabb 100%);
+}
+:root[data-theme='light'] .hero__mark {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .hero__title {
+  text-shadow: 0 3px 0 rgba(90, 67, 38, 0.28);
+}
+:root[data-theme='light'] .featurecard {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 34%);
+}
+
+:root[data-theme='light'] .dash__hero {
+  background:
+    radial-gradient(520px 200px at 88% 0%, rgba(47, 127, 196, 0.14), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #ece0c4 60%, #e7dabb 100%);
+}
+
+:root[data-theme='light'] .whatnext {
+  background: linear-gradient(180deg, #f7efd8 0, var(--panel) 40%, var(--panel) 100%);
+}
+:root[data-theme='light'] .whatnext__banner {
+  background: linear-gradient(90deg, rgba(201, 138, 30, 0.3), rgba(201, 138, 30, 0.06));
+}
+:root[data-theme='light'] .whatnext__portrait {
+  background:
+    radial-gradient(60px 60px at 50% 40%, rgba(201, 138, 30, 0.22), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #e7dabb 100%);
+}
+:root[data-theme='light'] .whatnext__prep,
+:root[data-theme='light'] .preppill {
+  background: var(--panel-deep);
+}
+
+:root[data-theme='light'] .tree__band {
+  color: #6a3a20;
+  background: linear-gradient(90deg, rgba(201, 74, 52, 0.24), rgba(122, 83, 192, 0.2));
+}
+:root[data-theme='light'] .node {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 32%);
+}
+:root[data-theme='light'] .node__status {
+  background: var(--panel-deep);
+}
+
+:root[data-theme='light'] .bossdetail__hero {
+  background:
+    radial-gradient(340px 200px at 18% 50%, rgba(201, 138, 30, 0.16), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #ece0c4 60%, #e7dabb 100%);
+}
+:root[data-theme='light'] .bossdetail__art,
+:root[data-theme='light'] .buildstage__num {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .bossdetail__art {
+  color: inherit;
+  background:
+    radial-gradient(90px 90px at 50% 45%, rgba(201, 138, 30, 0.16), transparent 72%),
+    repeating-linear-gradient(45deg, rgba(90, 67, 38, 0.04) 0 4px, transparent 4px 8px),
+    linear-gradient(180deg, #f2ead6 0, #e2d5b6 100%);
+}
+
+:root[data-theme='light'] .itemcard {
+  background: linear-gradient(180deg, #f4ecd6 0, var(--panel) 40%);
+}
+:root[data-theme='light'] .itemcard__tag {
+  color: #fff8e6;
+}
+
+:root[data-theme='light'] .arena {
+  background:
+    repeating-linear-gradient(0deg, rgba(90, 67, 38, 0.03) 0 4px, transparent 4px 8px),
+    linear-gradient(180deg, #cdeaf5 0, #b6dff0 100%);
+}
+:root[data-theme='light'] .arena__ground {
+  background: repeating-linear-gradient(90deg, #6f9a3c 0 6px, #5a8030 6px 10px);
+  box-shadow: inset 0 3px 0 #86b552;
+}
+
+:root[data-theme='light'] .orerow,
+:root[data-theme='light'] .potionrow,
+:root[data-theme='light'] .npcrow,
+:root[data-theme='light'] .settingrow,
+:root[data-theme='light'] .stepitem {
+  background: rgba(226, 213, 182, 0.55);
+}
+:root[data-theme='light'] .stepitem__num,
+:root[data-theme='light'] .stepitem__num {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .toggle__track {
+  background: var(--panel-deep);
+}
+
+/* setup + option cards */
+:root[data-theme='light'] .optioncard,
+:root[data-theme='light'] .stepper__dot {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 30%);
+}
+:root[data-theme='light'] .optioncard.is-selected {
+  background: linear-gradient(180deg, #f9edc8 0, var(--panel) 34%);
+}
+:root[data-theme='light'] .optioncard.is-selected::after,
+:root[data-theme='light'] .optioncard__ribbon,
+:root[data-theme='light'] .stepper__dot.is-active {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .stagepicker__item {
+  background: rgba(226, 213, 182, 0.5);
+}
+
 </style>
 <link rel="icon" href="data:," />
 </head>
@@ -3471,6 +3876,7 @@ function demoState() {
     display: {
       reducedMotion: false,
       compact: false,
+      theme: 'dark', // 'dark' (night) | 'light' (day-in-forest)
     },
   };
 }
@@ -3654,6 +4060,19 @@ function applyDisplayPreferences() {
   const root = document.documentElement;
   root.classList.toggle('reduced-motion', Boolean(state.display.reducedMotion));
   root.classList.toggle('compact', Boolean(state.display.compact));
+  const theme = state.display.theme === 'light' ? 'light' : 'dark';
+  root.setAttribute('data-theme', theme);
+  root.style.setProperty('color-scheme', theme);
+}
+
+function getTheme() {
+  return state.display.theme === 'light' ? 'light' : 'dark';
+}
+
+function toggleTheme() {
+  const next = getTheme() === 'light' ? 'dark' : 'light';
+  setDisplay({ theme: next });
+  return next;
 }
 
 const storageKey = STORAGE_KEY;
@@ -4011,6 +4430,7 @@ function renderSky() {
     stars,
     clouds,
     h('div.tg-sky__moon'),
+    h('div.tg-sky__sun'),
     h('div.tg-sky__ridge.tg-sky__ridge--far'),
     h('div.tg-sky__ridge.tg-sky__ridge--near'),
     trees,
@@ -10467,11 +10887,36 @@ function topbar(openDrawer) {
     ),
     h('div.topbar__spacer'),
     globalSearch(),
+    themeToggleButton(),
     h(
       'div.topbar__actions',
       btn('Edit journey', { variant: 'ghost', size: 'sm', href: '#/setup', icon: '✎' })
     )
   );
+}
+
+/** Dark ⇄ light toggle button that lives in the top bar. */
+function themeToggleButton() {
+  const el = h('button.btn.btn--ghost.btn--icon.topbar__theme', {
+    type: 'button',
+    onclick: () => {
+      const next = toggleTheme();
+      toast(next === 'light' ? 'Light mode — day in the forest' : 'Dark mode — night sky', {
+        icon: next === 'light' ? '☀️' : '🌙',
+      });
+    },
+  });
+
+  function paint() {
+    const light = getTheme() === 'light';
+    el.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    el.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    el.replaceChildren(glyph(light ? '🌙' : '☀️'));
+  }
+
+  paint();
+  subscribe(paint);
+  return el;
 }
 
 function iconBtnMenu(openDrawer) {
@@ -14737,6 +15182,24 @@ function settingsPage() {
         panelHead('Display'),
         h(
           'div.stack',
+          settingRow(
+            'Theme',
+            'Dark mode is a Terraria night sky; light mode is a bright day in the forest.',
+            chipGroup({
+              options: [
+                { id: 'dark', label: '🌙 Dark' },
+                { id: 'light', label: '☀️ Light' },
+              ],
+              selected: [state.display.theme === 'light' ? 'light' : 'dark'],
+              multi: false,
+              onToggle: (id) => {
+                setDisplay({ theme: id });
+                toast(id === 'light' ? 'Light mode — day in the forest' : 'Dark mode — night sky', {
+                  icon: id === 'light' ? '☀️' : '🌙',
+                });
+              },
+            })
+          ),
           settingRow(
             'Reduced animations',
             'Turns off twinkling stars, drifting clouds, pulsing nodes and sparkle effects.',

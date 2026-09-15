@@ -77,6 +77,7 @@ export function renderSky() {
     stars,
     clouds,
     h('div.tg-sky__moon'),
+    h('div.tg-sky__sun'),
     h('div.tg-sky__ridge.tg-sky__ridge--far'),
     h('div.tg-sky__ridge.tg-sky__ridge--near'),
     trees,

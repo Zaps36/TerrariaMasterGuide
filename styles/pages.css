@@ -1208,3 +1208,122 @@ a.featurecard:hover {
     font-size: 0.52rem;
   }
 }
+
+
+/* ==========================================================================
+   LIGHT THEME OVERRIDES — page compositions
+   ========================================================================== */
+
+:root[data-theme='light'] .hero {
+  background:
+    radial-gradient(600px 240px at 50% 0%, rgba(201, 138, 30, 0.16), transparent 70%),
+    linear-gradient(180deg, #f7f1df 0, #efe4c6 55%, #e7dabb 100%);
+}
+:root[data-theme='light'] .hero__mark {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .hero__title {
+  text-shadow: 0 3px 0 rgba(90, 67, 38, 0.28);
+}
+:root[data-theme='light'] .featurecard {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 34%);
+}
+
+:root[data-theme='light'] .dash__hero {
+  background:
+    radial-gradient(520px 200px at 88% 0%, rgba(47, 127, 196, 0.14), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #ece0c4 60%, #e7dabb 100%);
+}
+
+:root[data-theme='light'] .whatnext {
+  background: linear-gradient(180deg, #f7efd8 0, var(--panel) 40%, var(--panel) 100%);
+}
+:root[data-theme='light'] .whatnext__banner {
+  background: linear-gradient(90deg, rgba(201, 138, 30, 0.3), rgba(201, 138, 30, 0.06));
+}
+:root[data-theme='light'] .whatnext__portrait {
+  background:
+    radial-gradient(60px 60px at 50% 40%, rgba(201, 138, 30, 0.22), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #e7dabb 100%);
+}
+:root[data-theme='light'] .whatnext__prep,
+:root[data-theme='light'] .preppill {
+  background: var(--panel-deep);
+}
+
+:root[data-theme='light'] .tree__band {
+  color: #6a3a20;
+  background: linear-gradient(90deg, rgba(201, 74, 52, 0.24), rgba(122, 83, 192, 0.2));
+}
+:root[data-theme='light'] .node {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 32%);
+}
+:root[data-theme='light'] .node__status {
+  background: var(--panel-deep);
+}
+
+:root[data-theme='light'] .bossdetail__hero {
+  background:
+    radial-gradient(340px 200px at 18% 50%, rgba(201, 138, 30, 0.16), transparent 70%),
+    linear-gradient(180deg, #f4ecd6 0, #ece0c4 60%, #e7dabb 100%);
+}
+:root[data-theme='light'] .bossdetail__art,
+:root[data-theme='light'] .buildstage__num {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .bossdetail__art {
+  color: inherit;
+  background:
+    radial-gradient(90px 90px at 50% 45%, rgba(201, 138, 30, 0.16), transparent 72%),
+    repeating-linear-gradient(45deg, rgba(90, 67, 38, 0.04) 0 4px, transparent 4px 8px),
+    linear-gradient(180deg, #f2ead6 0, #e2d5b6 100%);
+}
+
+:root[data-theme='light'] .itemcard {
+  background: linear-gradient(180deg, #f4ecd6 0, var(--panel) 40%);
+}
+:root[data-theme='light'] .itemcard__tag {
+  color: #fff8e6;
+}
+
+:root[data-theme='light'] .arena {
+  background:
+    repeating-linear-gradient(0deg, rgba(90, 67, 38, 0.03) 0 4px, transparent 4px 8px),
+    linear-gradient(180deg, #cdeaf5 0, #b6dff0 100%);
+}
+:root[data-theme='light'] .arena__ground {
+  background: repeating-linear-gradient(90deg, #6f9a3c 0 6px, #5a8030 6px 10px);
+  box-shadow: inset 0 3px 0 #86b552;
+}
+
+:root[data-theme='light'] .orerow,
+:root[data-theme='light'] .potionrow,
+:root[data-theme='light'] .npcrow,
+:root[data-theme='light'] .settingrow,
+:root[data-theme='light'] .stepitem {
+  background: rgba(226, 213, 182, 0.55);
+}
+:root[data-theme='light'] .stepitem__num,
+:root[data-theme='light'] .stepitem__num {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .toggle__track {
+  background: var(--panel-deep);
+}
+
+/* setup + option cards */
+:root[data-theme='light'] .optioncard,
+:root[data-theme='light'] .stepper__dot {
+  background: linear-gradient(180deg, var(--panel-light) 0, var(--panel) 30%);
+}
+:root[data-theme='light'] .optioncard.is-selected {
+  background: linear-gradient(180deg, #f9edc8 0, var(--panel) 34%);
+}
+:root[data-theme='light'] .optioncard.is-selected::after,
+:root[data-theme='light'] .optioncard__ribbon,
+:root[data-theme='light'] .stepper__dot.is-active {
+  color: #fff8e6;
+}
+:root[data-theme='light'] .stagepicker__item {
+  background: rgba(226, 213, 182, 0.5);
+}

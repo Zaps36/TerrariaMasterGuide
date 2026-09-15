@@ -8,14 +8,14 @@
 
 import { h, mount, qsa, glyph } from '../core/dom.js';
 import { navigate } from '../core/router.js';
-import { getState, subscribe } from '../core/store.js';
+import { getState, getTheme, subscribe, toggleTheme } from '../core/store.js';
 import { CLASS_MAP, DIFFICULTY_MAP, EVIL_MAP, STAGE_MAP } from '../data/stages.js';
 import { currentStageId, mainProgress } from '../logic/progression.js';
 import { searchGrouped } from '../logic/search.js';
 import { spriteTile } from '../core/sprites.js';
 import { tint } from '../data/tints.js';
 import { MOBILE_ITEMS, NAV_ITEMS, SETTINGS_ITEM, navIdForPath } from './nav.js';
-import { btn, iconBtn, progressBar } from './ui.js';
+import { btn, iconBtn, progressBar, toast } from './ui.js';
 
 let activeNavId = 'dashboard';
 
@@ -220,11 +220,36 @@ function topbar(openDrawer) {
     ),
     h('div.topbar__spacer'),
     globalSearch(),
+    themeToggleButton(),
     h(
       'div.topbar__actions',
       btn('Edit journey', { variant: 'ghost', size: 'sm', href: '#/setup', icon: '✎' })
     )
   );
+}
+
+/** Dark ⇄ light toggle button that lives in the top bar. */
+function themeToggleButton() {
+  const el = h('button.btn.btn--ghost.btn--icon.topbar__theme', {
+    type: 'button',
+    onclick: () => {
+      const next = toggleTheme();
+      toast(next === 'light' ? 'Light mode — day in the forest' : 'Dark mode — night sky', {
+        icon: next === 'light' ? '☀️' : '🌙',
+      });
+    },
+  });
+
+  function paint() {
+    const light = getTheme() === 'light';
+    el.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    el.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+    el.replaceChildren(glyph(light ? '🌙' : '☀️'));
+  }
+
+  paint();
+  subscribe(paint);
+  return el;
 }
 
 function iconBtnMenu(openDrawer) {
